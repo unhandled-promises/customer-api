@@ -151,7 +151,6 @@ components:
   schemas:
     Customer:
       required:
-        - id
         - name
         - address
         - city
@@ -160,10 +159,10 @@ components:
         - postal
         - active
         - package
+        - owner
       properties:
-        id:
-          type: integer
-          format: int64
+        _id:
+          type: string
         name:
           type: string
         address:
@@ -175,6 +174,8 @@ components:
         state:
           type: string
         country:
+          type: string
+        owner:
           type: string
         postal:
           type: string
