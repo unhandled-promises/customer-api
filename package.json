@@ -10,6 +10,7 @@
     "postinstall": "yarn build",
     "test": "jest --coverage --colors",
     "test:watch": "jest --coverage --colors --watchAll",
+    "serve": "node build/server.js",
     "start": "webpack --watch"
   },
   "jest": {
