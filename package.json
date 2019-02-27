@@ -1,9 +1,13 @@
 {
-  "name": "express-backend",
+  "name": "customer-api",
   "version": "0.1.0",
   "main": "./build/server.js",
   "author": "Chris Figgins",
-  "license": "ISC",
+  "license": "MIT",
+  "engines": {
+    "node": "11.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
