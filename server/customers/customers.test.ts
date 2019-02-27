@@ -23,40 +23,39 @@ describe("/api/customers tests", () => {
 
     beforeEach(async () => {
         const customer = {
-            "name": "LiMu Emu",
-            "address": "150 Liberty Way",
-            "address2": "PO Box 23",
-            "city": "Dover",
-            "state": "NH",
-            "country": "United States",
-            "owner": "lkj34lk23234",
-            "postal": "03820",
-            "active": true,
-            "package": "gold"
-        }
+            active: true,
+            address: "150 Liberty Way",
+            address2: "PO Box 23",
+            city: "Dover",
+            country: "United States",
+            name: "LiMu Emu",
+            package: "gold",
+            postal: "03820",
+            state: "NH",
+        };
 
         const newCustomer = new Customer(customer);
         await newCustomer.save();
-    })
+    });
 
     // Unit Test
     it("should get all customers", async () => {
         const response = await request(app)
-            .get("/api/customers/")
+            .get("/api/customers/");
 
         expect(response.status).toBe(200);
-        expect(response.body).toEqual([expect.objectContaining({ "name": "LiMu Emu", "package": "gold" })])
+        expect(response.body).toEqual([expect.objectContaining({ name: "LiMu Emu", package: "gold" })]);
     });
 
     // Unit Test
     it("should get a customer", async () => {
-        const customerInfo = await Customer.findOne({ name: "LiMu Emu" })
+        const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
 
         const response = await request(app)
             .get(`/api/customers/${customerInfo._id}`);
 
         expect(response.status).toBe(200);
-        expect(response.body).toEqual([expect.objectContaining({ "name": "LiMu Emu", "package": "gold" })])
+        expect(response.body).toEqual([expect.objectContaining({ name: "LiMu Emu", package: "gold" })]);
     });
 
     // Unit Test
@@ -71,39 +70,37 @@ describe("/api/customers tests", () => {
     // Unit Test
     it("should post a new customer", async () => {
         const newCustomer = {
-            "name": "LiMu Emu2",
-            "address": "150 Liberty Way",
-            "address2": "PO Box 23",
-            "city": "Dover",
-            "state": "NH",
-            "country": "United States",
-            "owner": "lkj34lk23234",
-            "postal": "03820",
-            "active": true,
-            "package": "gold"
-        }
+            active: true,
+            address: "150 Liberty Way",
+            address2: "PO Box 23",
+            city: "Dover",
+            country: "United States",
+            name: "LiMu Emu2",
+            package: "gold",
+            postal: "03820",
+            state: "NH",
+        };
 
         const response = await request(app)
             .post("/api/customers")
             .send(newCustomer);
 
         expect(response.status).toBe(201);
-        expect(response.body).toBe("Customer saved!")
+        expect(response.body).toBe("Customer saved!");
     });
 
     // Unit Test
     it("should toss an error trying to add a new customer", async () => {
         const newCustomer = {
-            "address": "150 Liberty Way",
-            "address2": "PO Box 23",
-            "city": "Dover",
-            "state": "NH",
-            "country": "United States",
-            "owner": "lkj34lk23234",
-            "postal": "03820",
-            "active": true,
-            "package": "gold"
-        }
+            active: true,
+            address: "150 Liberty Way",
+            address2: "PO Box 23",
+            city: "Dover",
+            country: "United States",
+            package: "gold",
+            postal: "03820",
+            state: "NH",
+        };
 
         const response = await request(app)
             .post("/api/customers")
@@ -114,7 +111,7 @@ describe("/api/customers tests", () => {
 
     // Unit Test
     it("should delete a customer", async () => {
-        const customerInfo = await Customer.findOne({ name: "LiMu Emu" })
+        const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
 
         const response = await request(app)
             .delete(`/api/customers/${customerInfo._id}`);

@@ -12,6 +12,7 @@
     "build": "webpack --config webpack.config.js",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "postinstall": "yarn build",
+    "pretest": "tslint --project tsconfig.json --format codeFrame",
     "test": "jest --coverage --colors",
     "test:watch": "jest --coverage --colors --watchAll",
     "serve": "node build/server.js",
@@ -58,11 +59,9 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "express-jwt": "^5.3.1",
     "mongoose": "^5.4.13"
   }
 }

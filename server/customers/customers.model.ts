@@ -2,51 +2,48 @@ import { Document, model, Schema } from "mongoose";
 import { SchemaDef } from "../../types";
 
 // Declare model interface
-interface CustomerDoc extends App.Customer, Document {}
+interface ICustomerDoc extends App.Customer, Document {}
 
 const customerSchemaDef: SchemaDef<App.Customer> = {
-    name: {
-        type: String,
-        required: true
+    active: {
+        required: true,
+        type: Boolean,
     },
     address: {
+        required: true,
         type: String,
-        required: true
     },
     address2: {
-        type: String
+        type: String,
     },
     city: {
+        required: true,
         type: String,
-        required: true
-    },
-    state: {
-        type: String,
-        required: true
     },
     country: {
+        required: true,
         type: String,
-        required: true
     },
-    owner: {
+    name: {
+        required: true,
         type: String,
-        required: true
-    },
-    postal: {
-        type: String,
-        required: true
-    },
-    active: {
-        type: Boolean,
-        required: true
+        unique: true,
     },
     package: {
+        required: true,
         type: String,
-        required: true
-    }
+    },
+    postal: {
+        required: true,
+        type: String,
+    },
+    state: {
+        required: true,
+        type: String,
+    },
 };
 
 // Define model schema
-const customerSchema = new Schema(customerSchemaDef);
+const customerSchema = new Schema(customerSchemaDef, { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } });
 
-export default model<CustomerDoc>("Customer", customerSchema);
+export default model<ICustomerDoc>("Customer", customerSchema);

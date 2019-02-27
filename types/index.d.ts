@@ -7,7 +7,6 @@ declare module App {
       city: string;
       state: string;
       country: string;
-      owner: string;
       postal: string;
       active: boolean;
       package: string;
