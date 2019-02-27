@@ -1,6 +1,10 @@
-import { model, Schema } from "mongoose";
+import { Document, model, Schema } from "mongoose";
+import { SchemaDef } from "../../types";
 
-const customerSchemaDef = {
+// Declare model interface
+interface CustomerDoc extends App.Customer, Document {}
+
+const customerSchemaDef: SchemaDef<App.Customer> = {
     name: {
         type: String,
         required: true
@@ -33,7 +37,7 @@ const customerSchemaDef = {
         required: true
     },
     active: {
-        type: boolean,
+        type: Boolean,
         required: true
     },
     package: {
@@ -45,4 +49,4 @@ const customerSchemaDef = {
 // Define model schema
 const customerSchema = new Schema(customerSchemaDef);
 
-export default model("Customer", customerSchema);
+export default model<CustomerDoc>("Customer", customerSchema);
