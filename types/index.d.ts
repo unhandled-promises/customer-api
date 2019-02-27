@@ -5,6 +5,7 @@ declare module App {
       address: string;
       address2: string;
       city: string;
+      email: string;
       state: string;
       country: string;
       postal: string;

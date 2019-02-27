@@ -24,6 +24,11 @@ const customerSchemaDef: SchemaDef<App.Customer> = {
         required: true,
         type: String,
     },
+    email: {
+        required: true,
+        type: String,
+        unique: true,
+    },
     name: {
         required: true,
         type: String,
