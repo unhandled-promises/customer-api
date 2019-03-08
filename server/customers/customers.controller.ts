@@ -18,7 +18,7 @@ router.route("/").post(bodyParser.json(), async (request, response) => {
     try {
         const customer = new Customer(request.body);
         await customer.save();
-        return response.status(201).json("Customer saved!");
+        return response.status(201).json(customer);
     } catch (error) {
         console.log(error);
         return response.status(400).send(error);
