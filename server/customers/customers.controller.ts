@@ -34,7 +34,7 @@ router.route("/:id/exist").get(async (request, response) => {
 router.route("/:id").get(async (request, response) => {
     try {
         const customerId = request.params.id;
-        const customer = await Customer.findOne({ _id: customerId });
+        const customer = await Customer.find({ _id: customerId });
         return response.status(200).json(customer);
     } catch (error) {
         console.log(error);
