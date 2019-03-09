@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import * as express from "express";
-import * as path from "path";
+import Token from "./util/auth";
 
 // Put dotenv in use before importing controllers
 dotenv.config();
@@ -30,12 +30,7 @@ app.use(allowCrossDomain);
 // Assign controllers to routes
 app.use("/api/customers", customersController);
 
-// Declare the path to frontend's static assets
-app.use(express.static(path.resolve("..", "frontend", "build")));
-
-// Intercept requests to return the frontend's static entry point
-// app.get("*", (request, response) => {
-//   response.sendFile(path.resolve("..", "frontend", "build", "index.html"));
-// });
+// Init Token
+Token.init();
 
 export default app;

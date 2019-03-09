@@ -1,5 +1,6 @@
 import { Document, model, Schema } from "mongoose";
 import { SchemaDef } from "../../types";
+import { App } from "../../types/index";
 
 // Declare model interface
 interface ICustomerDoc extends App.Customer, Document {}
