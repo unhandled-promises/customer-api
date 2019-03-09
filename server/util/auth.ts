@@ -57,11 +57,11 @@ export default class Token {
         }
     }
 
-    public static authorize(authCheck: Array<string>, request: express.Request) {
+    public static authorize(authCheck: string[], request: express.Request) {
         let validityCheck = false;
 
         while (validityCheck === false && authCheck.length !== 0) {
-            let role: string = authCheck[0];
+            const role: string = authCheck[0];
             authCheck.shift();
 
             switch (role) {
