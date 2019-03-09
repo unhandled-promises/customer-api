@@ -4,16 +4,6 @@ import Customer from "./customers.model";
 
 const router = express.Router();
 
-router.route("/").get(async (request, response) => {
-    try {
-        const customers = await Customer.find();
-        return response.status(200).json(customers);
-    } catch (error) {
-        console.log(error);
-        return response.status(400).send(error);
-    }
-});
-
 router.route("/").post(bodyParser.json(), async (request, response) => {
     try {
         const customer = new Customer(request.body);
@@ -25,11 +15,27 @@ router.route("/").post(bodyParser.json(), async (request, response) => {
     }
 });
 
+router.route("/:id/exist").get(async (request, response) => {
+    try {
+        const customerId = request.params.id;
+        const customer = await Customer.findOne({ _id: customerId });
+
+        if (customer !== null) {
+            return response.status(200).json(true);
+        } else {
+            throw new Error("Not Found");
+        }
+    } catch (error) {
+        console.log(error);
+        return response.status(404).send(false);
+    }
+});
+
 router.route("/:id").get(async (request, response) => {
     try {
         const customerId = request.params.id;
-        const customers = await Customer.find({ _id: customerId });
-        return response.status(200).json(customers);
+        const customer = await Customer.findOne({ _id: customerId });
+        return response.status(200).json(customer);
     } catch (error) {
         console.log(error);
         return response.status(404).send(error);

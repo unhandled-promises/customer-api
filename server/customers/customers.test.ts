@@ -40,15 +40,6 @@ describe("/api/customers tests", () => {
     });
 
     // Unit Test
-    it("should get all customers", async () => {
-        const response = await request(app)
-            .get("/api/customers/");
-
-        expect(response.status).toBe(200);
-        expect(response.body).toEqual([expect.objectContaining({ name: "LiMu Emu", package: "gold" })]);
-    });
-
-    // Unit Test
     it("should get a customer", async () => {
         const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
 
