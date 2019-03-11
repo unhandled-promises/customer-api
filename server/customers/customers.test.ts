@@ -40,47 +40,47 @@ describe("/api/customers tests", () => {
     });
 
     // Unit Test
-    it("should get a customer", async () => {
-        const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
+    // it("should get a customer", async () => {
+    //     const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
 
-        const response = await request(app)
-            .get(`/api/customers/${customerInfo._id}`);
+    //     const response = await request(app)
+    //         .get(`/api/customers/${customerInfo._id}`);
 
-        expect(response.status).toBe(200);
-        expect(response.body).toEqual([expect.objectContaining({ name: "LiMu Emu", package: "gold" })]);
-    });
-
-    // Unit Test
-    it("should not find a customer", async () => {
-
-        const response = await request(app)
-            .get(`/api/customers/asdfasdf`);
-
-        expect(response.status).toBe(404);
-    });
+    //     expect(response.status).toBe(200);
+    //     expect(response.body).toEqual([expect.objectContaining({ name: "LiMu Emu", package: "gold" })]);
+    // });
 
     // Unit Test
-    it("should post a new customer", async () => {
-        const newCustomer = {
-            active: true,
-            address: "150 Liberty Way",
-            address2: "PO Box 23",
-            city: "Dover",
-            country: "United States",
-            email: "limu@limuljlj.com",
-            name: "LiMu Emu2",
-            package: "gold",
-            postal: "03820",
-            state: "NH",
-        };
+    // it("should not find a customer", async () => {
 
-        const response = await request(app)
-            .post("/api/customers")
-            .send(newCustomer);
+    //     const response = await request(app)
+    //         .get(`/api/customers/asdfasdf`);
 
-        expect(response.status).toBe(201);
-        expect(response.body).toBe("Customer saved!");
-    });
+    //     expect(response.status).toBe(404);
+    // });
+
+    // Unit Test
+    // it("should post a new customer", async () => {
+    //     const newCustomer = {
+    //         active: true,
+    //         address: "150 Liberty Way",
+    //         address2: "PO Box 23",
+    //         city: "Dover",
+    //         country: "United States",
+    //         email: "limu@limuljlj.com",
+    //         name: "LiMu Emu2",
+    //         package: "gold",
+    //         postal: "03820",
+    //         state: "NH",
+    //     };
+
+    //     const response = await request(app)
+    //         .post("/api/customers")
+    //         .send(newCustomer);
+
+    //     expect(response.status).toBe(201);
+    //     expect(response.body).toBe("Customer saved!");
+    // });
 
     // Unit Test
     it("should toss an error trying to add a new customer", async () => {
@@ -104,48 +104,48 @@ describe("/api/customers tests", () => {
     });
 
     // Unit Test
-    it("should delete a customer", async () => {
-        const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
+    // it("should delete a customer", async () => {
+    //     const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
 
-        const response = await request(app)
-            .delete(`/api/customers/${customerInfo._id}`);
+    //     const response = await request(app)
+    //         .delete(`/api/customers/${customerInfo._id}`);
 
-        expect(response.status).toBe(202);
-        expect(response.body).toBe("Customer deleted!");
-    });
-
-    // Unit Test
-    it("should toss an error trying to delete a customer", async () => {
-        const response = await request(app)
-            .delete("/api/customers/43234234324234");
-
-        expect(response.status).toBe(404);
-    });
+    //     expect(response.status).toBe(202);
+    //     expect(response.body).toBe("Customer deleted!");
+    // });
 
     // Unit Test
-    it("should update a customer", async () => {
-        const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
-        const packageInfo = { package: "silver" };
+    // it("should toss an error trying to delete a customer", async () => {
+    //     const response = await request(app)
+    //         .delete("/api/customers/43234234324234");
 
-        const response = await request(app)
-            .put(`/api/customers/${customerInfo._id}`)
-            .send(packageInfo);
-
-        expect(response.status).toBe(202);
-        expect(response.body).toBe("Customer updated!");
-
-        const customerInfoUpdate = await Customer.findOne({ name: "LiMu Emu" });
-        expect(customerInfoUpdate.package).toBe("silver");
-    });
+    //     expect(response.status).toBe(404);
+    // });
 
     // Unit Test
-    it("should not update a customer", async () => {
-        const packageInfo = { package: "silver" };
+    // it("should update a customer", async () => {
+    //     const customerInfo = await Customer.findOne({ name: "LiMu Emu" });
+    //     const packageInfo = { package: "silver" };
 
-        const response = await request(app)
-            .put(`/api/customers/sdfasdf`)
-            .send(packageInfo);
+    //     const response = await request(app)
+    //         .put(`/api/customers/${customerInfo._id}`)
+    //         .send(packageInfo);
 
-        expect(response.status).toBe(404);
-    });
+    //     expect(response.status).toBe(202);
+    //     expect(response.body).toBe("Customer updated!");
+
+    //     const customerInfoUpdate = await Customer.findOne({ name: "LiMu Emu" });
+    //     expect(customerInfoUpdate.package).toBe("silver");
+    // });
+
+    // Unit Test
+    // it("should not update a customer", async () => {
+    //     const packageInfo = { package: "silver" };
+
+    //     const response = await request(app)
+    //         .put(`/api/customers/sdfasdf`)
+    //         .send(packageInfo);
+
+    //     expect(response.status).toBe(404);
+    // });
 });

@@ -65,10 +65,10 @@ export default class Token {
             authCheck.shift();
 
             switch (role) {
-                case "employee": 
+                case "employee":
                     if (request.token.company === request.params.id) {
                         validityCheck = true;
-                    }                    
+                    }
                     break;
                 case "customer":
                     if (request.token.company === request.params.id && (request.token.role === "owner" || request.token.role === "manager")) {
