@@ -86,11 +86,11 @@ router.route("/:id/charge").post(bodyParser.text(), async (request, response) =>
         const stripePayment = new stripe(stripeKey);
         const customerId = request.params.id;
 
-        let { status } = await stripePayment.charges.create({
+        const { status } = await stripePayment.charges.create({
             amount: 2000,
             currency: "usd",
             description: "Fit2Work Dev",
-            source: request.body
+            source: request.body,
         });
 
         const ccUpdate = { cc_token: request.body};
@@ -101,6 +101,6 @@ router.route("/:id/charge").post(bodyParser.text(), async (request, response) =>
     } catch (error) {
         return response.status(500).json(error.toString());
     }
-})
+});
 
 export default router;
