@@ -4,9 +4,7 @@ export declare module App {
         name: string;
         address: string;
         address2: string;
-        card_exp: string;
-        card_number: string;
-        card_type: string;
+        cc_token: string;
         city: string;
         email: string;
         state: string;
