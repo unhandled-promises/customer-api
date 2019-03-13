@@ -17,13 +17,7 @@ const customerSchemaDef: SchemaDef<App.Customer> = {
     address2: {
         type: String,
     },
-    card_exp: {
-        type: String,
-    },
-    card_number: {
-        type: String,
-    },
-    card_type: {
+    cc_token: {
         type: String,
     },
     city: {

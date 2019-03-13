@@ -1,7 +1,12 @@
 import * as bodyParser from "body-parser";
+import * as dotenv from "dotenv";
 import * as express from "express";
+import * as stripe from "stripe";
 import Token from "../util/auth";
 import Customer from "./customers.model";
+
+// Put dotenv in use before importing controllers
+dotenv.config();
 
 const router = express.Router();
 
@@ -70,6 +75,31 @@ router.route("/:id").put(Token.authenticate, bodyParser.json(), async (request, 
         }
     } catch (error) {
         return response.status(404).json(error.toString());
+    }
+});
+
+router.route("/:id/charge").post(bodyParser.text(), async (request, response) => {
+    try {
+        console.log(request.body);
+
+        const stripeKey = process.env.STRIPE_SECRET_KEY;
+        const stripePayment = new stripe(stripeKey);
+        const customerId = request.params.id;
+
+        const { status } = await stripePayment.charges.create({
+            amount: 2000,
+            currency: "usd",
+            description: "Fit2Work Dev",
+            source: request.body,
+        });
+
+        const ccUpdate = { cc_token: request.body};
+
+        await Customer.update({ _id: customerId }, ccUpdate, { new: true });
+
+        return response.status(200).json({ status });
+    } catch (error) {
+        return response.status(500).json(error.toString());
     }
 });
 
