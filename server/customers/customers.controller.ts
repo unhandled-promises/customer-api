@@ -38,7 +38,7 @@ router.route("/search").get(async (request, response) => {
             throw Error();
         }
 
-    } catch(error) {
+    } catch (error) {
         return response.status(404).json(false);
     }
 });
