@@ -20,6 +20,29 @@ router.route("/").post(bodyParser.json(), async (request, response) => {
     }
 });
 
+router.route("/search").get(async (request, response) => {
+    try {
+        const emailStatus = request.query.email;
+        const companyStatus = request.query.name;
+
+        let company;
+        if (emailStatus) {
+            company = await Customer.findOne({ email: emailStatus });
+        } else if (companyStatus) {
+            company = await Customer.findOne({ name: companyStatus });
+        }
+
+        if (company.name) {
+            return response.status(200).json(true);
+        } else {
+            throw Error();
+        }
+
+    } catch(error) {
+        return response.status(404).json(false);
+    }
+});
+
 router.route("/:id/exist").get(async (request, response) => {
     try {
         const customerId = request.params.id;
@@ -35,15 +58,16 @@ router.route("/:id/exist").get(async (request, response) => {
     }
 });
 
-router.route("/:id").get(Token.authenticate, async (request, response) => {
+router.route("/:id").get(async (request, response) => {
+// router.route("/:id").get(Token.authenticate, async (request, response) => {
     try {
-        if (await Token.authorize(["employee"], request)) {
+    //     if (await Token.authorize(["employee"], request)) {
             const customerId = request.params.id;
             const customer = await Customer.find({ _id: customerId });
             return response.status(200).json(customer);
-        } else {
-            throw Error("No Access");
-        }
+        // } else {
+        //     throw Error("No Access");
+        // }
     } catch (error) {
         return response.status(404).json(error.toString());
     }
